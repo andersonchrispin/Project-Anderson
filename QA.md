@@ -93,7 +93,7 @@ FROM
                 ) as tempo
 ) AS tempo
 
-The mean is 18702
+The mean is 18702 which flags for further investigation on this table to ensure this flow is realistic.
 
 SELECT 
 	*, 
@@ -113,7 +113,10 @@ FROM (
 GROUP BY date_, count
 ORDER BY date_
 
-The variability stays under 100% that is acceptable for a random variable on website visits
+The variability stays under 100% that is acceptable for a random variable on website visits. However, as mentioned above the mean flags for further 
+investigation. And also the fact that after applying a primary key on "visitid", the table will loose about 97% of its information. It seems not 
+reliable to use this information as it's aggregated into the table. It may be more useful to pursue more investigation to split this table. It is 
+possible that rearanging this table into sub table may result to more reliable set of data.
 __________________________________________________________________________________________________________________________________________
 
 The tables "sales_report" and "products" contain static data set. To validate we can consider
@@ -134,7 +137,7 @@ where [column] = NULL
 
 on all the other columns will return 0. No data loss
 
-3 - The values stay within credible bounds
+3 - The values stay within credible bounds from 0 to 465.
 
 Using the scripts 
 SELECT MAX([column]) FROM sales_report and SELECT MIN([column]) FROM sales_report
@@ -155,7 +158,7 @@ where [column] = NULL
 
 on all the other columns will return 0. No data loss
 
-3 - The values stay within credible bounds
+3 - The values stay within credible bounds from 0 - 15170. But the mean is 143.53, so further investion on the company business may be helpful.
 
 Using the scripts 
 SELECT MAX([column]) FROM products and SELECT MIN([column]) FROM products
